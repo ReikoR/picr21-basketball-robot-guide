@@ -3,9 +3,9 @@ const fs = require('fs').promises;
 const path = require('path');
 
 (async function process() {
-    child_process.execSync('asciidoctor -R source -D html source/**/*.asciidoc');
+    child_process.execSync('asciidoctor -R source -D docs source/**/*.asciidoc');
 
-    for await (const filename of getFiles('html')) {
+    for await (const filename of getFiles('docs')) {
         console.log(filename);
         await processLinks(filename);
     }
