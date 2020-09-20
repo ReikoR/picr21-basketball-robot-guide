@@ -1,2 +1,24 @@
 == Connections
 
+=== Labels
+
+Use labels on nets instead of drawing long wires between components.
+
+image::../images/schematic_net_labels.png[Net labels,600]
+
+=== Supply connections
+
+Avoid connecting all the power supply pins together. Use power supply symbols instead.
+
+image::../images/schematic_supply_symbols.png[Supply symbols,600]
+
+== Decoupling capacitors
+
+It is recommended to connect a decoupling (bypass) capacitor close to each power input pin.
+Common capacitance value is 100 nF.
+On a schematic, the capacitors can be connected directly to the power pin.
+Or they can be connected together close to the component when the component has multiple decoupling capacitors
+and there is not enough room to directly wire them to the component.
+
+image::../images/schematic_decoupling_capacitors.png[Net labels,600]
+

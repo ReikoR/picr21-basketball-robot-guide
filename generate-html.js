@@ -9,6 +9,20 @@ const path = require('path');
         console.log(filename);
         await processLinks(filename);
     }
+
+    try {
+        await fs.mkdir('docs/images');
+    } catch (e) {
+        if (e.code !== 'EEXIST') {
+            console.error(e);
+            return;
+        }
+    }
+
+    for await (const filename of getFiles('source/images')) {
+        console.log(filename);
+        await fs.copyFile(filename, filename.replace('source', 'docs'));
+    }
 })();
 
 async function processLinks(filename) {

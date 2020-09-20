@@ -443,13 +443,51 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_connections">Connections</h2>
 <div class="sectionbody">
-
+<div class="sect2">
+<h3 id="_labels">Labels</h3>
+<div class="paragraph">
+<p>Use labels on nets instead of drawing long wires between components.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/schematic_net_labels.png" alt="Net labels" width="600">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_supply_connections">Supply connections</h3>
+<div class="paragraph">
+<p>Avoid connecting all the power supply pins together. Use power supply symbols instead.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/schematic_supply_symbols.png" alt="Supply symbols" width="600">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decoupling_capacitors">Decoupling capacitors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is recommended to connect a decoupling (bypass) capacitor close to each power input pin.
+Common capacitance value is 100 nF.
+On a schematic, the capacitors can be connected directly to the power pin.
+Or they can be connected together close to the component when the component has multiple decoupling capacitors
+and there is not enough room to directly wire them to the component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/schematic_decoupling_capacitors.png" alt="Net labels" width="600">
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-09-20 15:32:01 +0300
+Last updated 2020-09-20 19:58:29 +0300
 </div>
 </div>
 </body>
