@@ -1,0 +1,94 @@
+:stem:
+
+== Software and documentation
+
+link:https://www.st.com/en/development-tools/stm32cubeide.html[STM32CubeIDE]
+
+link:https://www.st.com/resource/en/datasheet/stm32g431kb.pdf[STM32G431KB datasheet]
+
+link:https://www.st.com/resource/en/reference_manual/dm00355726-stm32g4-series-advanced-armbased-32bit-mcus-stmicroelectronics.pdf[STM32G4 series reference manual]
+
+== Programmer interface
+
+Programmer interface can be enabled from _SYS -> Debug: Serial Wire_.
+
+== USB
+
+USB virtual serial port can be used to communicate with robot's computer.
+
+Enable by checking _USB -> Device (FS)_
+and selecting _USB_DEVICE -> Class For FS IP: Communication Device Class (Virtual Port Com)_.
+
+== Encoders
+
+Motors have quadrature encoders, that output 2 signals that are 90 degrees out od phase depending on the rotation direction.
+The easiest way to read encoder signals is using timer's encoder mode.
+When timer's encoder mode is used, then PWM outputs can't be used on the same timer for controlling motor drivers,
+because timer's counter value will be changed by encoder signals instead of clock signal.
+
+=== STM32CubeIDE timer configuration
+
+* Mode:
+** *Combined Channels: Encoder Mode*
+
+* Configuration:
+** Parameter settings:
+*** *Encoder Mode: Encoder Mode TI1 and TI2*
++
+This will count all the edges from both of the timer's inputs.
+
+== PWM
+
+=== STM32CubeIDE timer configuration
+
+* Mode:
+** *Channel#: PWM Generation CH#*
+
+* Configuration:
+** Parameter settings:
+*** Counter settings:
+**** *Prescaler: see below*
+**** *Counter period: see below*
+
+=== Frequency
+
+Frequency of each timer can be calculated from prescaler register value (PSC)
+and counter period/autoreload register value (ARR) with a following formula:
+
+asciimath:[f = f_(clock) / ((PSC + 1) (AR\R + 1)]
+
+_f~clock~_ is the timer clock, that can be found and configured from *Clock configuration* page in STM32CubeIDE,
+where it is referred to as _APB1 timer clocks_ or _APB2 timer clocks_.
+
+To see if timer is connected to APB1 or APB2, refer to _Figure 1. STM32G431x6/x8/xB block diagram_ in the datasheet or
+_7.4.17 APB1 peripheral clock enable register 1 (RCC_APB1ENR1)_ and
+_7.4.19 APB2 peripheral clock enable register (RCC_APB2ENR)_ in the reference manual.
+
+All PWM outputs of the timer share the same frequency.
+
+==== PWM for wheel motor drivers
+
+Each motor driver needs 2 PWM inputs alternatively 1 PWM and 1 direction input.
+Recommended way is to use 2 PWM inputs.
+
+If PSC = 0, ARR = 65535, _f~clock~_ = 170 MHz, then _f~PWM~_ &asymp; 2594 Hz,
+which is suitable frequency for motor drivers.
+
+=== PWM for thrower motor driver
+
+Usually brushless ESCs are controlled by single PWM signal with frequency of 50 Hz (period = 20 ms)
+and pulse width between 1 ms and 2 ms.
+Often higher frequencies and shorter pulse width are supported.
+
+Newer ESCs also support DShot protocol, which is a digital protocol as opposed to regular PWM being analog.
+
+DShot can be implemented with 1 PWM output and DMA.
+
+link:https://dmrlawson.co.uk/index.php/2017/12/04/dshot-in-the-dark/[More information about DShot]
+
+Timer for thrower motor PWM should be separate from wheel motor PWM timers to be able to use different frequency.
+
+
+
+
+
