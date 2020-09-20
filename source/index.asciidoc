@@ -1,3 +1,7 @@
-== Guide for building a basketball robot in Practical Work in Robotics course
+== Electronics
 
-link:https://reikor.github.io/pwir20-basketball-robot-guide/[]
+link:electronics/components.asciidoc[Components]
+
+link:electronics/schematic.asciidoc[Schematic]
+
+link:electronics/firmware.asciidoc[Firmware]
