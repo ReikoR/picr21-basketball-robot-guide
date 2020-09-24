@@ -1,3 +1,4 @@
+:stem:
 :toc:
 :toclevels: 1
 :toc-title: Table of contents
@@ -200,3 +201,22 @@ and a resistor can be used to limit current through zener diode.
 * No separate components are needed.
 * Simple rectangular SMD pads, where wires can be soldered, take little room and creates a reliable connection.
 * Pad size can be 3 x 3 mm or larger for 18 AWG wire.
+
+== LEDs
+
+=== Requirements
+
+* LEDs can be connected to microcontroller and used in firmware to indicate that something is working.
+* LEDs can also be connected to voltage regulator output to indicate that the board has power.
+* LED's brightness is controlled with current.
+The simplest way to limit current is to use resistor in series with the LED.
+* LED's current can be calculated with the following equation: asciimath:[I = (V_(s\upply) - V_F) / R]
+, where _V~F~_ is LED's forward voltage. _V~F~_ can be found in the LED's datasheet.
+
+=== Recommended
+
+* 0603 SMD package.
+* Current around 1 mA.
+Higher currents usually make the LED too bright and waste energy.
+Exact current is not that important if LED is used for visual indication
+and can be changed later by replacing the resistor.
