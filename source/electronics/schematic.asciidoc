@@ -74,3 +74,10 @@ It is recommended to connect 100 nF decoupling capacitor to nRESET pin.
 It is possible to connect a switch between nRESET pin and ground to reset the microcontroller manually,
 but manual reset is usually not needed and can be done by disconnecting the power.
 
+== Open drain outputs
+
+nFAULT pin on DRV8874 is an open drain output.
+
+Examples on how to use open drain outputs can be found in this
+link:https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgosgCgAzEXAFnGdewRTY+7GiQxIKWgHcmXcCjwS+YPrTAZu7GVVUgAtNm5VySQVCgCQAGQCiAERAAHAK4AbB3ZsgAbgHsHAFwCGAcwBTWn9ZcEIqTj5iXVpTJkhWMHYQFARCHiMqel8HAGdA6joAWRANFGYqBHlUyqMUAVoAJzLmGTAajTajZgw4RUIVbvVu7u4AE0Ccx29NB0Dx8CzjODBaACNwBFYUFTAkTmIoMTCOofaaugAPcKQMCGwyEAxWJNYAeRtAgDsAHTzxk1fABLP55Dx2bz2bx5f6gvLAyb-ADGHgAtjYPN8ft5aDcwIRWMQdnhsCAnm8QAAFJqBPKwvKmAD0AAl-t4POyPP5-PM8WUntgIAhiDJsK82CAAMJY7HI7yg-z-CyWfnMYgQTAZQYZTBHSkAJUCvnGiv+EKhkP+CP831yDASO2UYUw3B04BMQhEoSiqTwYskOiodHiLFSzrSuudwZAOXyhUEJ19FRGMhTxxa5TqGiUGSoYHgdCU53AGAyOZSemohmDJnekOhIBtdoctkczlcnh8AWC4mTdWT6XAtCAA[Falstad simulation]
+
