@@ -1,4 +1,7 @@
 :stem:
+:toc:
+:toclevels: 2
+:toc-title: Table of contents
 
 = Firmware
 
@@ -89,6 +92,20 @@ DShot can be implemented with 1 PWM output and DMA.
 link:https://dmrlawson.co.uk/index.php/2017/12/04/dshot-in-the-dark/[More information about DShot]
 
 Timer for thrower motor PWM should be separate from wheel motor PWM timers to be able to use different frequency.
+
+== Boot configuration
+
+Boot configuration is detailed in
+link:https://www.st.com/resource/en/reference_manual/dm00355726-stm32g4-series-advanced-armbased-32bit-mcus-stmicroelectronics.pdf[reference manual]
+under _2.6 Boot configuration_ section.
+
+nSWBOOT0 bit in FLASH_OPTR registry determines
+whether BOOT0 pin (when nSWBOOT0 = 1) or nBOOT0 in FLASH_OPTR registry (when nSWBOOT0 = 0)
+is used to select boot mode.
+
+BOOT0 can be left unused or used for some other function if nSWBOOT0 is set to 1 in FLASH_OPTR registry.
+
+One option to check and change FLASH_OPTR registry settings is to use STM32CubeProgrammer and Option Bytes in there.
 
 
 

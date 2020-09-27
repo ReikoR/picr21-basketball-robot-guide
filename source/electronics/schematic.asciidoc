@@ -58,3 +58,19 @@ On the schematic the connections should look similar to the image below:
 
 image::../images/schematic_programmer_connector_arm10.png[Programmer connector,400]
 
+== Microcontroller
+
+=== BOOT0 pin
+
+BOOT0 pin can be left unused or used for some other function if nSWBOOT0 is set to 1 in FLASH_OPTR registry.
+If nSWBOOT0 is set to 0, then pulldown resitor should be connected to BOOT0 pin.
+For more information see Boot configuration section on link:firmware.asciidoc[Firmware] page.
+
+=== nRESET pin
+
+nRESET pin has an internal pullup.
+It is recommended to connect 100 nF decoupling capacitor to nRESET pin.
+
+It is possible to connect a switch between nRESET pin and ground to reset the microcontroller manually,
+but manual reset is usually not needed and can be done by disconnecting the power.
+
