@@ -1,4 +1,28 @@
+:toc:
+:toclevels: 2
+:toc-title: Table of contents
+
 = Schematic
+
+== Reference designators
+
+Reference designators are unique identifiers for each component.
+For example U1, R2, D2.
+Designators are usually prefixed with a letter or letters, that correspond to component's type.
+Prefix is followed by a number, so that the letter and number combination is unique on the entire schematic.
+Prefixes can be usually specified in component library.
+
+Common prefixes:
+
+* U or IC - integrated circuit. For example microcontroller, motor driver or voltage regulator.
+* R - resistor.
+* C - capacitor.
+* D - diode or LED (light emitting diode).
+* LED - light emitting diode.
+* L - inductor.
+* Q - transistor.
+* J or CON - connector.
+* S - switch.
 
 == Connections
 
