@@ -48,3 +48,13 @@ and there is not enough room to directly wire them to the component.
 
 image::../images/schematic_decoupling_capacitors.png[Net labels,600]
 
+== Programmer connector
+
+One place where to find the pinout for programmer connector is in
+link:https://www.st.com/resource/en/user_manual/dm00555046-stlinkv3mods-and-stlinkv3mini-mini-debuggersprogrammers-for-stm32-stmicroelectronics.pdf[STLINK-V3MINI user manual]
+under _9.1.3 STDC14 for STLINK-V3MINI (STM32 JTAG/SWD and VCP)_.
+
+On the schematic the connections should look similar to the image below:
+
+image::../images/schematic_programmer_connector_arm10.png[Programmer connector,400]
+
