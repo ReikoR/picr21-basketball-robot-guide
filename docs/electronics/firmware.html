@@ -439,6 +439,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article">
 <div id="header">
 <h1>Firmware</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of contents</div>
+<ul class="sectlevel1">
+<li><a href="#_software_and_documentation">Software and documentation</a></li>
+<li><a href="#_programmer_interface">Programmer interface</a></li>
+<li><a href="#_usb">USB</a></li>
+<li><a href="#_encoders">Encoders</a>
+<ul class="sectlevel2">
+<li><a href="#_stm32cubeide_timer_configuration">STM32CubeIDE timer configuration</a></li>
+</ul>
+</li>
+<li><a href="#_pwm">PWM</a>
+<ul class="sectlevel2">
+<li><a href="#_stm32cubeide_timer_configuration_2">STM32CubeIDE timer configuration</a></li>
+<li><a href="#_frequency">Frequency</a></li>
+<li><a href="#_pwm_for_thrower_motor_driver">PWM for thrower motor driver</a></li>
+</ul>
+</li>
+<li><a href="#_boot_configuration">Boot configuration</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
@@ -625,10 +646,31 @@ Often higher frequencies and shorter pulse width are supported.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_boot_configuration">Boot configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Boot configuration is detailed in
+<a href="https://www.st.com/resource/en/reference_manual/dm00355726-stm32g4-series-advanced-armbased-32bit-mcus-stmicroelectronics.pdf">reference manual</a>
+under <em>2.6 Boot configuration</em> section.</p>
+</div>
+<div class="paragraph">
+<p>nSWBOOT0 bit in FLASH_OPTR registry determines
+whether BOOT0 pin (when nSWBOOT0 = 1) or nBOOT0 in FLASH_OPTR registry (when nSWBOOT0 = 0)
+is used to select boot mode.</p>
+</div>
+<div class="paragraph">
+<p>BOOT0 can be left unused or used for some other function if nSWBOOT0 is set to 1 in FLASH_OPTR registry.</p>
+</div>
+<div class="paragraph">
+<p>One option to check and change FLASH_OPTR registry settings is to use STM32CubeProgrammer and Option Bytes in there.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-09-23 22:12:06 +0300
+Last updated 2020-09-27 13:22:44 +0300
 </div>
 </div>
 <script type="text/x-mathjax-config">
