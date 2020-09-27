@@ -15,6 +15,17 @@ link:https://github.com/ReikoR/pwir20-basketball-robot-guide[]
 
 == Changelog
 
+=== 2020-09-27
+
+. Added following sections to the schematic page:
+* Reference designators
+* Programmer connector
+* Microcontroller BOOT0 and nRESET pins
+* Open drain outputs
+* Bulk capacitors
+. Added boot configuration section to the firmware page.
+. Added some recommended voltage regulators on the components page.
+
 === 2020-09-24
 
 . Added LEDs section to the components page.
