@@ -6,6 +6,8 @@ link:electronics/components.asciidoc[Components]
 
 link:electronics/schematic.asciidoc[Schematic]
 
+link:electronics/pcb_layout.asciidoc[PCB layout]
+
 link:electronics/firmware.asciidoc[Firmware]
 
 == Document source
@@ -14,6 +16,15 @@ Generated from asciidoc files available here:
 link:https://github.com/ReikoR/pwir20-basketball-robot-guide[]
 
 == Changelog
+
+=== 2020-10-18
+
+. Created the PCB layout page with the following sections:
+** Design rules
+** Layers
+** General steps
+** Component placement
+** Routing
 
 === 2020-09-27
 
