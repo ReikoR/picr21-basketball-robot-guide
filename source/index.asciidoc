@@ -17,6 +17,14 @@ link:https://github.com/ReikoR/pwir20-basketball-robot-guide[]
 
 == Changelog
 
+=== 2020-11-23
+
+. Added following to the firmware page:
+* GPIO section with LED output toggling example.
+* USB communication code example.
+* Code for enabling encoder mode and reading current value.
+* Code for enabling PWM and changing duty cycle.
+
 === 2020-10-18
 
 . Created the PCB layout page with the following sections:
