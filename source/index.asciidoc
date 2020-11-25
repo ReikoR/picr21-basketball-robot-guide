@@ -17,6 +17,13 @@ link:https://github.com/ReikoR/pwir20-basketball-robot-guide[]
 
 == Changelog
 
+=== 2020-11-25
+
+. Added following to the firmware page:
+* Encoder value change calculation.
+* Periodic interrupt setup for motor control.
+* Initial PID controller section.
+
 === 2020-11-23
 
 . Added following to the firmware page:

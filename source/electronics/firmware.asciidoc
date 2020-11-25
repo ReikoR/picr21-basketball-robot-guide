@@ -201,10 +201,16 @@ int main(void)
 ----
 
 Current encoder value can be read from timer's counter register.
+It is useful to have timer's autoreload register value at 65535, which is the highest 16-bit value
+and cast encoder value to signed 16-bit integer (int16_t).
+If all the encoder timers are 32-bit, then it might be more useful to do the same with 32-bit types.
+Casting to signed integer allows for a simple encoder value change calculation in both negative and positive directions.
+Encoder value (position) change can be used as a speed feedback in motor control.
 
 [source,c,tabsize=2]
 ----
-TIM1->CNT
+int16_t position = (int16_t)TIM1->CNT;
+int16_t positionChange = position - positionPrev;
 ----
 
 == PWM
@@ -236,7 +242,7 @@ _7.4.19 APB2 peripheral clock enable register (RCC_APB2ENR)_ in the reference ma
 
 All PWM outputs of a timer share the same frequency.
 
-==== PWM for wheel motor drivers
+=== PWM for wheel motor drivers
 
 Each motor driver needs 2 PWM inputs or 1 PWM and 1 direction input.
 Recommended way is to use 2 PWM inputs.
@@ -282,6 +288,57 @@ Duty cycle can range from 0 to the value specified in autoreload register.
 ----
 TIM2->CCR1 = 9500; // Timer 2, channel 1
 ----
+
+== Motor control
+
+=== Periodic interrupt
+
+Using fixed period for calculations simplifies motor control by allowing to omit time from calculations.
+
+Timer can be used to generate periodic interrupts.
+Calculations can be done in interrupt handler.
+
+Prescaler and autoreload registers need to be configured under _Parameter Settings_ to set the frequency of interrupts.
+Good frequency could be 100 Hz.
+Higher frequencies reduce the number of encoder changes between interrupts
+and lower frequencies reduce the motor control responsiveness.
+
+Timer (global or update) interrupt can be enabled under _NVIC Settings_.
+Update interrupt is generated every time the timer's counter register overflows from autoreload register value to 0.
+
+Timer can be enabled by calling _HAL_TIM_Base_Start_IT_.
+
+.main.c
+[source,c,tabsize=2]
+----
+// ..
+HAL_TIM_Base_Start_IT(&htim6);
+/* USER CODE END 2 */
+----
+
+Timer's update interrupt can be defined
+by implementing _HAL_TIM_PeriodElapsedCallback_ function from _stm32g4xx_hal_tim.c_.
+It is usually not recommended to have long-running code in interrupt handler,
+but since motor control code is time sensitive (by omitting time from calculations)
+and there is no other computation done at the same time,
+it is fine to have it in interrupt handler.
+
+.main.c
+[source,c,tabsize=2]
+----
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  // Motor control calculations can be called from here
+}
+----
+
+=== PID controller
+
+Motor speed control can be implemented with a PID controller.
+Just a PI controller, where derivative part is not implemented/used, is usually also fine when controlling motor speed.
+
+Encoder changes can be used as a speed feedback.
+Setpoints can be received through the USB communication.
+Output of the controller should be PWM for a motor driver.
 
 == Boot configuration
 
