@@ -460,8 +460,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_stm32cubeide_timer_configuration_2">STM32CubeIDE timer configuration</a></li>
 <li><a href="#_frequency">Frequency</a></li>
+<li><a href="#_pwm_for_wheel_motor_drivers">PWM for wheel motor drivers</a></li>
 <li><a href="#_pwm_for_thrower_motor_driver">PWM for thrower motor driver</a></li>
 <li><a href="#_pwm_code">PWM code</a></li>
+</ul>
+</li>
+<li><a href="#_motor_control">Motor control</a>
+<ul class="sectlevel2">
+<li><a href="#_periodic_interrupt">Periodic interrupt</a></li>
+<li><a href="#_pid_controller">PID controller</a></li>
 </ul>
 </li>
 <li><a href="#_boot_configuration">Boot configuration</a></li>
@@ -772,11 +779,17 @@ because timer&#8217;s counter value will be changed by encoder signals instead o
 </div>
 </div>
 <div class="paragraph">
-<p>Current encoder value can be read from timer&#8217;s counter register.</p>
+<p>Current encoder value can be read from timer&#8217;s counter register.
+It is useful to have timer&#8217;s autoreload register value at 65535, which is the highest 16-bit value
+and cast encoder value to signed 16-bit integer (int16_t).
+If all the encoder timers are 32-bit, then it might be more useful to do the same with 32-bit types.
+Casting to signed integer allows for a simple encoder value change calculation in both negative and positive directions.
+Encoder value (position) change can be used as a speed feedback in motor control.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">TIM1-&gt;CNT</code></pre>
+<pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">int16_t position = (int16_t)TIM1-&gt;CNT;
+int16_t positionChange = position - positionPrev;</code></pre>
 </div>
 </div>
 </div>
@@ -850,8 +863,9 @@ where it is referred to as <em>APB1 timer clocks</em> or <em>APB2 timer clocks</
 <div class="paragraph">
 <p>All PWM outputs of a timer share the same frequency.</p>
 </div>
-<div class="sect3">
-<h4 id="_pwm_for_wheel_motor_drivers">PWM for wheel motor drivers</h4>
+</div>
+<div class="sect2">
+<h3 id="_pwm_for_wheel_motor_drivers">PWM for wheel motor drivers</h3>
 <div class="paragraph">
 <p>Each motor driver needs 2 PWM inputs or 1 PWM and 1 direction input.
 Recommended way is to use 2 PWM inputs.</p>
@@ -859,7 +873,6 @@ Recommended way is to use 2 PWM inputs.</p>
 <div class="paragraph">
 <p>If PSC = 0, ARR = 65535, <em>f<sub>clock</sub></em> = 160 MHz, then <em>f<sub>PWM</sub></em> &asymp; 2448 Hz,
 which is suitable frequency for motor drivers.</p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -914,6 +927,70 @@ Duty cycle can range from 0 to the value specified in autoreload register.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_motor_control">Motor control</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_periodic_interrupt">Periodic interrupt</h3>
+<div class="paragraph">
+<p>Using fixed period for calculations simplifies motor control by allowing to omit time from calculations.</p>
+</div>
+<div class="paragraph">
+<p>Timer can be used to generate periodic interrupts.
+Calculations can be done in interrupt handler.</p>
+</div>
+<div class="paragraph">
+<p>Prescaler and autoreload registers need to be configured under <em>Parameter Settings</em> to set the frequency of interrupts.
+Good frequency could be 100 Hz.
+Higher frequencies reduce the number of encoder changes between interrupts
+and lower frequencies reduce the motor control responsiveness.</p>
+</div>
+<div class="paragraph">
+<p>Timer (global or update) interrupt can be enabled under <em>NVIC Settings</em>.
+Update interrupt is generated every time the timer&#8217;s counter register overflows from autoreload register value to 0.</p>
+</div>
+<div class="paragraph">
+<p>Timer can be enabled by calling <em>HAL_TIM_Base_Start_IT</em>.</p>
+</div>
+<div class="listingblock">
+<div class="title">main.c</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">// ..
+HAL_TIM_Base_Start_IT(&amp;htim6);
+/* USER CODE END 2 */</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Timer&#8217;s update interrupt can be defined
+by implementing <em>HAL_TIM_PeriodElapsedCallback</em> function from <em>stm32g4xx_hal_tim.c</em>.
+It is usually not recommended to have long-running code in interrupt handler,
+but since motor control code is time sensitive (by omitting time from calculations)
+and there is no other computation done at the same time,
+it is fine to have it in interrupt handler.</p>
+</div>
+<div class="listingblock">
+<div class="title">main.c</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  // Motor control calculations can be called from here
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pid_controller">PID controller</h3>
+<div class="paragraph">
+<p>Motor speed control can be implemented with a PID controller.
+Just a PI controller, where derivative part is not implemented/used, is usually also fine when controlling motor speed.</p>
+</div>
+<div class="paragraph">
+<p>Encoder changes can be used as a speed feedback.
+Setpoints can be received through the USB communication.
+Output of the controller should be PWM for a motor driver.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_boot_configuration">Boot configuration</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -937,7 +1014,7 @@ is used to select boot mode.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-11-23 10:00:31 +0200
+Last updated 2020-11-25 22:36:08 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
