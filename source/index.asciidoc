@@ -4,7 +4,7 @@
 
 link:electronics/components.asciidoc[Components]
 
-link:electronics/altium_designer.asciidoc[Components]
+link:electronics/altium_designer.asciidoc[Altium Designer]
 
 link:electronics/schematic.asciidoc[Schematic]
 
