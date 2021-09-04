@@ -1,3 +1,3 @@
 == Guide for building a basketball robot in Practical Work in Robotics course
 
-link:https://reikor.github.io/pwir20-basketball-robot-guide/[]
+link:https://reikor.github.io/picr21-basketball-robot-guide/[]

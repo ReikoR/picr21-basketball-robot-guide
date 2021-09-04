@@ -4,6 +4,8 @@
 
 link:electronics/components.asciidoc[Components]
 
+link:electronics/altium_designer.asciidoc[Components]
+
 link:electronics/schematic.asciidoc[Schematic]
 
 link:electronics/pcb_layout.asciidoc[PCB layout]
