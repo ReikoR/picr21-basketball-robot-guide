@@ -2,6 +2,8 @@
 
 == Electronics
 
+link:electronics/test_robot.asciidoc[Test robot]
+
 link:electronics/components.asciidoc[Components]
 
 link:electronics/altium_designer.asciidoc[Altium Designer]
