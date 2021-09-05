@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<title>Basketball robot guide</title>
+<title>Test robot</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,259 +438,105 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Basketball robot guide</h1>
+<h1>Test robot</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of contents</div>
+<ul class="sectlevel1">
+<li><a href="#_mainboard">Mainboard</a>
+<ul class="sectlevel2">
+<li><a href="#_firmware">Firmware</a></li>
+</ul>
+</li>
+<li><a href="#_wheel_motor_driver">Wheel motor driver</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_electronics">Electronics</h2>
+<h2 id="_mainboard">Mainboard</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="electronics/test_robot.html">Test robot</a></p>
+<p><a href="https://github.com/ReikoR/pwir21-NUCLEO-adapter">Altium Designer project</a></p>
 </div>
 <div class="paragraph">
-<p><a href="electronics/components.html">Components</a></p>
+<p><a href="https://github.com/ReikoR/pwir21-NUCLEO-adapter/blob/master/pwir21-NUCLEO-adapter-panel.PDF">Schematic and PCB drawing PDF</a></p>
+</div>
+<div class="sect2">
+<h3 id="_firmware">Firmware</h3>
+<div class="sect3">
+<h4 id="_sending_commands_to_mainboard">Sending commands to mainboard</h4>
+<div class="paragraph">
+<p>Struct in firmware</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">typedef struct Command {
+  int16_t speed1;
+  int16_t speed2;
+  int16_t speed3;
+  uint16_t throwerSpeed;
+  uint16_t delimiter;
+} Command;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p><a href="electronics/altium_designer.html">Altium Designer</a></p>
+<p>Using with python&#8217;s <a href="https://docs.python.org/3/library/struct.html">struct library</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="python" class="language-python hljs">struct.pack('&lt;hhhHH', speed1, speed2, speed3, thrower_speed, 0xAAAA)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_receiving_data_from_mainboard">Receiving data from mainboard</h4>
+<div class="paragraph">
+<p>Struct in firmware</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">typedef struct Feedback {
+  int16_t speed1;
+  int16_t speed2;
+  int16_t speed3;
+  uint16_t delimiter;
+} Feedback;</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p><a href="electronics/schematic.html">Schematic</a></p>
+<p>Using with python&#8217;s <a href="https://docs.python.org/3/library/struct.html">struct library</a></p>
 </div>
-<div class="paragraph">
-<p><a href="electronics/pcb_layout.html">PCB layout</a></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="python" class="language-python hljs">actual_speed1, actual_speed2, actual_speed3, feedback_delimiter = struct.unpack('&lt;hhhH', received_data)</code></pre>
 </div>
-<div class="paragraph">
-<p><a href="electronics/firmware.html">Firmware</a></p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_document_source">Document source</h2>
+<h2 id="_wheel_motor_driver">Wheel motor driver</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Generated from asciidoc files available here:
-<a href="https://github.com/ReikoR/pwir20-basketball-robot-guide" class="bare">https://github.com/ReikoR/pwir20-basketball-robot-guide</a></p>
+<p><a href="https://digilabor.ut.ee/index.php/MC33886_driver_board">Wiki page</a></p>
 </div>
+<div class="paragraph">
+<p><a href="https://github.com/ReikoR/MC33886_driver_board">Altium Designer project</a></p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_changelog">Changelog</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_2020_11_25">2020-11-25</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Added following to the firmware page:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Encoder value change calculation.</p>
-</li>
-<li>
-<p>Periodic interrupt setup for motor control.</p>
-</li>
-<li>
-<p>Initial PID controller section.</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2020_11_23">2020-11-23</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Added following to the firmware page:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>GPIO section with LED output toggling example.</p>
-</li>
-<li>
-<p>USB communication code example.</p>
-</li>
-<li>
-<p>Code for enabling encoder mode and reading current value.</p>
-</li>
-<li>
-<p>Code for enabling PWM and changing duty cycle.</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2020_10_18">2020-10-18</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Created the PCB layout page with the following sections:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Design rules</p>
-</li>
-<li>
-<p>Layers</p>
-</li>
-<li>
-<p>General steps</p>
-</li>
-<li>
-<p>Component placement</p>
-</li>
-<li>
-<p>Routing</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2020_09_27">2020-09-27</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Added following sections to the schematic page:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Reference designators</p>
-</li>
-<li>
-<p>Programmer connector</p>
-</li>
-<li>
-<p>Microcontroller BOOT0 and nRESET pins</p>
-</li>
-<li>
-<p>Open drain outputs</p>
-</li>
-<li>
-<p>Bulk capacitors</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Added boot configuration section to the firmware page.</p>
-</li>
-<li>
-<p>Added some recommended voltage regulators on the components page.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2020_09_24">2020-09-24</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Added LEDs section to the components page.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_2020_09_20">2020-09-20</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Created the components page with the following sections:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Motor driver</p>
-</li>
-<li>
-<p>Microcontroller</p>
-</li>
-<li>
-<p>USB connector</p>
-</li>
-<li>
-<p>USB protection</p>
-</li>
-<li>
-<p>Voltage regulator for microcontroller</p>
-</li>
-<li>
-<p>Voltage regulator at the motor driver’s side</p>
-</li>
-<li>
-<p>Isolators</p>
-</li>
-<li>
-<p>Encoder connectors</p>
-</li>
-<li>
-<p>Thrower ESC connector</p>
-</li>
-<li>
-<p>Programmer connector</p>
-</li>
-<li>
-<p>Reverse voltage protection</p>
-</li>
-<li>
-<p>High current connections</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Created the schematic page with the following sections:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Connections</p>
-</li>
-<li>
-<p>Decoupling capacitors</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Created the firmware page with the following sections:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Software and documentation</p>
-</li>
-<li>
-<p>Programmer interface</p>
-</li>
-<li>
-<p>USB</p>
-</li>
-<li>
-<p>Encoders</p>
-</li>
-<li>
-<p>PWM</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
+<div class="paragraph">
+<p><a href="https://github.com/ReikoR/MC33886_driver_board/blob/master/MC33886_driver_board.PDF">Schematic PDF</a></p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-04 21:39:30 +0300
+Last updated 2021-09-05 08:51:59 +0300
 </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
 </body>
 </html>
