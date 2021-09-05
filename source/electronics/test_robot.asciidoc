@@ -13,6 +13,12 @@ link:https://github.com/ReikoR/pwir21-NUCLEO-adapter/blob/master/pwir21-NUCLEO-a
 
 === Firmware
 
+==== Binary firmware file
+
+link:picr21-NUCLEO-adapter-firmware.bin[]
+
+Connect NUCLEO to a computer and drag or copy the *.bin file on the NOD_G431KB drive.
+
 ==== Sending commands to mainboard
 
 Struct in firmware
