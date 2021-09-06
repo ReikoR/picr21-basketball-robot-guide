@@ -17,7 +17,7 @@ link:electronics/firmware.asciidoc[Firmware]
 == Document source
 
 Generated from asciidoc files available here:
-link:https://github.com/ReikoR/pwir20-basketball-robot-guide[]
+link:https://github.com/ReikoR/picr21-basketball-robot-guide[]
 
 == Changelog
 
