@@ -444,6 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_mainboard">Mainboard</a>
 <ul class="sectlevel2">
+<li><a href="#_nucleo_modifications">NUCLEO modifications</a></li>
 <li><a href="#_firmware">Firmware</a></li>
 </ul>
 </li>
@@ -460,6 +461,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/ReikoR/pwir21-NUCLEO-adapter/blob/master/pwir21-NUCLEO-adapter-panel.PDF">Schematic and PCB drawing PDF</a></p>
+</div>
+<div class="sect2">
+<h3 id="_nucleo_modifications">NUCLEO modifications</h3>
+<div class="paragraph">
+<p>There are jumper resistors and solder pads on the NUCLEO board that are used to connect some microcontroller pins to pin headers.
+Firmware uses some pins differently from the default jumper configuration.
+Necessary modifications are shown in <a href="#image_nucleo_jumpers">Figure 1</a>.
+0 ohm resistors marked as SB2 and SB3 should be removed and jumper pads marked as 8 and 11 should be soldered together.
+Alternatively SB2 and SB3 resistors can be soldered onto jumper pads 8 and 11.</p>
+</div>
+<div id="image_nucleo_jumpers" class="imageblock">
+<div class="content">
+<img src="../images/test_robot_nucleo_jumper_modifications.svg" alt="test robot nucleo jumper modifications" width="300">
+</div>
+<div class="title">Figure 1. NUCLEO jumper modifications</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_firmware">Firmware</h3>
@@ -541,7 +558,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-06 19:50:47 +0300
+Last updated 2021-09-08 21:05:50 +0300
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
