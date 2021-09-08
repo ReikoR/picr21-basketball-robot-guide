@@ -3,6 +3,9 @@
 :toclevels: 2
 :toc-title: Table of contents
 
+:xrefstyle: short
+:section-refsig:
+
 = Test robot
 
 == Mainboard
@@ -10,6 +13,18 @@
 link:https://github.com/ReikoR/pwir21-NUCLEO-adapter[Altium Designer project]
 
 link:https://github.com/ReikoR/pwir21-NUCLEO-adapter/blob/master/pwir21-NUCLEO-adapter-panel.PDF[Schematic and PCB drawing PDF]
+
+=== NUCLEO modifications
+
+There are jumper resistors and solder pads on the NUCLEO board that are used to connect some microcontroller pins to pin headers.
+Firmware uses some pins differently from the default jumper configuration.
+Necessary modifications are shown in <<image_nucleo_jumpers>>.
+0 ohm resistors marked as SB2 and SB3 should be removed and jumper pads marked as 8 and 11 should be soldered together.
+Alternatively SB2 and SB3 resistors can be soldered onto jumper pads 8 and 11.
+
+[#image_nucleo_jumpers]
+.NUCLEO jumper modifications
+image::../images/test_robot_nucleo_jumper_modifications.svg[width=300]
 
 === Firmware
 
