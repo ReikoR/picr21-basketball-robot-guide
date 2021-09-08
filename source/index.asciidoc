@@ -21,6 +21,23 @@ link:https://github.com/ReikoR/picr21-basketball-robot-guide[]
 
 == Changelog
 
+=== 2021-09-08
+
+. Added NUCLEO jumper modification info to the test robot page.
+
+=== 2021-09-06
+
+. Updated source repository URL.
+. Fixed test robot mainboard firmware *.bin file link.
+
+=== 2021-09-05
+
+. Created Test robot page with mainboard and motor driver information.
+
+=== 2021-09-04
+
+. Created Altium Designer page with some usage information.
+
 === 2020-11-25
 
 . Added following to the firmware page:
