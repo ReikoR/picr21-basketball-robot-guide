@@ -587,6 +587,20 @@ CDC_Receive_FS is a handler for incoming USB data.</p>
 <div class="listingblock">
 <div class="title">main.c</div>
 <div class="content">
+<pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">/* USER CODE BEGIN Includes */
+#include "usbd_cdc_if.h" // <b class="conum">(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<ol>
+<li>
+<p>Include usbd_cdc_if.h, where the CDC_On_Receive function was declared.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="title">main.c</div>
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="c" class="language-c hljs">/* USER CODE BEGIN 0 */
 typedef struct Command { // <b class="conum">(1)</b>
   int16_t speed1;
@@ -1014,7 +1028,7 @@ is used to select boot mode.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-11-25 22:36:08 +0200
+Last updated 2021-09-09 18:53:56 +0300
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
