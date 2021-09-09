@@ -22,7 +22,8 @@ link:https://github.com/ReikoR/picr21-basketball-robot-guide[]
 == Changelog
 
 === 2021-09-09
-. Add info to the firmware page about including usbd_cdc_if.h in main.c.
+. Added info to the firmware page about including usbd_cdc_if.h in main.c.
+. Added new test robot mainboard firmware that includes failsafe.
 
 === 2021-09-08
 
