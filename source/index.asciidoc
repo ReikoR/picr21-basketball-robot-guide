@@ -21,6 +21,9 @@ link:https://github.com/ReikoR/picr21-basketball-robot-guide[]
 
 == Changelog
 
+=== 2021-09-09
+. Add info to the firmware page about including usbd_cdc_if.h in main.c.
+
 === 2021-09-08
 
 . Added NUCLEO jumper modification info to the test robot page.

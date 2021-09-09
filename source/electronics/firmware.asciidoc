@@ -77,6 +77,14 @@ CDC_Receive_FS is a handler for incoming USB data.
 .main.c
 [source,c,tabsize=2]
 ----
+/* USER CODE BEGIN Includes */
+#include "usbd_cdc_if.h" // <1>
+----
+<1> Include usbd_cdc_if.h, where the CDC_On_Receive function was declared.
+
+.main.c
+[source,c,tabsize=2]
+----
 /* USER CODE BEGIN 0 */
 typedef struct Command { // <1>
 	int16_t speed1;
