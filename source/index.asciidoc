@@ -23,6 +23,7 @@ link:https://github.com/ReikoR/picr21-basketball-robot-guide[]
 
 === 2021-09-15
 . Changed recommended components to the ones that are in stock.
+. Changed recommended PCB layer stackup.
 
 === 2021-09-09
 . Added info to the firmware page about including usbd_cdc_if.h in main.c.

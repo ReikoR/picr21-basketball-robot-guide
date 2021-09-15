@@ -16,10 +16,10 @@ Requirements can also be manually checked with DRC (design rules check).
 
 It's recommended to use 4 layers:
 
-. Signals (top)
+. Signals and power (top)
 . GND
-. Power
-. Signals (bottom)
+. GND
+. Signals and power (bottom)
 
 == General steps
 
