@@ -486,7 +486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="https://www.st.com/en/development-tools/stm32cubeide.html">STM32CubeIDE</a></p>
 </div>
 <div class="paragraph">
-<p><a href="https://www.st.com/resource/en/datasheet/stm32g431kb.pdf">STM32G431KB datasheet</a></p>
+<p><a href="https://www.st.com/resource/en/datasheet/stm32g441kb.pdf">STM32G441KB datasheet</a></p>
 </div>
 <div class="paragraph">
 <p><a href="https://www.st.com/resource/en/reference_manual/dm00355726-stm32g4-series-advanced-armbased-32bit-mcus-stmicroelectronics.pdf">STM32G4 series reference manual</a></p>
@@ -870,7 +870,7 @@ and counter period/autoreload register value (ARR) with a following formula:</p>
 where it is referred to as <em>APB1 timer clocks</em> or <em>APB2 timer clocks</em>.</p>
 </div>
 <div class="paragraph">
-<p>To see if timer is connected to APB1 or APB2, refer to <em>Figure 1. STM32G431x6/x8/xB block diagram</em> in the datasheet or
+<p>To see if timer is connected to APB1 or APB2, refer to <em>Figure 1. STM32G441xB block diagram</em> in the datasheet or
 <em>7.4.17 APB1 peripheral clock enable register 1 (RCC_APB1ENR1)</em> and
 <em>7.4.19 APB2 peripheral clock enable register (RCC_APB2ENR)</em> in the reference manual.</p>
 </div>
@@ -882,7 +882,7 @@ where it is referred to as <em>APB1 timer clocks</em> or <em>APB2 timer clocks</
 <h3 id="_pwm_for_wheel_motor_drivers">PWM for wheel motor drivers</h3>
 <div class="paragraph">
 <p>Each motor driver needs 2 PWM inputs or 1 PWM and 1 direction input.
-Recommended way is to use 2 PWM inputs.</p>
+Recommended way for pre-production DRV8243 motor drivers is to use 1 PWM and 1 direction input.</p>
 </div>
 <div class="paragraph">
 <p>If PSC = 0, ARR = 65535, <em>f<sub>clock</sub></em> = 160 MHz, then <em>f<sub>PWM</sub></em> &asymp; 2448 Hz,
@@ -1028,7 +1028,7 @@ is used to select boot mode.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-09 18:53:56 +0300
+Last updated 2021-11-24 20:06:17 +0200
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
